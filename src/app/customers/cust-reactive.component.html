@@ -1,0 +1,85 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Customer Reactive Form!
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="custReForm" class="form-horizontal" novalidate
+    (ngSubmit)="save()">
+
+      <label for="firstNameId">FirstName</label>
+
+      <div [ngClass]="{'has-error':(custReForm.get('firstName').touched || custReForm.get('firstName').dirty) && custReForm.get('firstName').errors}">
+      <input type="text" class="form-control"
+      id="firstNameId"
+      formControlName="firstName" />
+
+      <span class="help-block" *ngIf="(custReForm.get('firstName').touched || custReForm.get('firstName').dirty) && custReForm.get('firstName').errors" > 
+          <span *ngIf="custReForm.get('firstName').errors.required">First Name is Mandatory</span>
+          <span *ngIf="custReForm.get('firstName').errors.minlength">first Name Should be of minimum three characters. </span>
+        </span>
+    </div>
+      <br/>
+        <label for="lastNameId">LastName</label>
+        <div 
+      [ngClass]="{'has-error':(custReForm.get('lastName').touched || custReForm.get('lastName').dirty) && custReForm.get('lastName').errors}">
+      <input type="text" name="lastName" class="form-control"
+      id="lastNameId"
+      formControlName="lastName">
+
+  
+      <span class="help-block" *ngIf="(custReForm.get('lastName').touched || custReForm.get('lastName').dirty) && custReForm.get('lastName').errors" > 
+          <span *ngIf="custReForm.get('lastName').errors.required">Last Name is Mandatory</span>
+          <span *ngIf="custReForm.get('lastName').errors.maxlength">Last Name Should be of maximum 20 characters. </span>
+        </span>
+     
+    </div>
+      <br/>
+       <label for="emailId">EmailId</label>
+       <div 
+       [ngClass]="{'has-error':(custReForm.get('email').touched || custReForm.get('email').dirty) && custReForm.get('email').errors}">
+      <input type="text" name="email" class="form-control"
+      id="emailId"
+      formControlName="email">
+      <span class="help-block" *ngIf="(custReForm.get('email').touched || custReForm.get('email').dirty) && custReForm.get('email').errors" > 
+          <span *ngIf="custReForm.get('email').errors.required">email is Mandatory</span>
+          <span *ngIf="custReForm.get('email').errors.pattern">Email should match the pattern. </span>
+        </span>
+    </div>
+    <br />
+    <label for="ratingId">Rating</label>
+    <div 
+    [ngClass]="{'has-error':(custReForm.get('rating').touched || custReForm.get('rating').dirty) && custReForm.get('rating').errors}">
+   <input type="text"  class="form-control"
+   id="ratingId"
+   formControlName="rating">
+   <span class="help-block" *ngIf="(custReForm.get('rating').touched || custReForm.get('rating').dirty) && custReForm.get('rating').errors" > 
+       <span *ngIf="custReForm.get('rating').errors.range">Rating should be between 1 and 5.</span>
+     </span>
+ </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+       <span>
+         <button class="btn btn-primary" type="submit" [disabled]="!custReForm.valid">
+           Save
+         </button>
+       </span>
+       <span>
+        <button class="btn btn-default" type="button" (click)="showData()">
+         Show From Data
+        </button>
+      </span>
+      </div>
+    </div>
+
+    </form>
+    </div>
+    </div>
+ 
+  <br/> Dirty   : {{custReForm.dirty}}
+  <br/> Touched : {{custReForm.touched}}
+  <br/>Valid   : {{custReForm.valid}}
+  <br/> Value   : {{custReForm.value|json}}
+  
+  
+  

@@ -1,0 +1,78 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    Customer Form!
+  </div>
+  
+  <div class="panel-body">
+    <form #custForm="ngForm" class="form-horizontal" novalidate
+    (ngSubmit)="save(custForm)"
+    >
+      <label for="firstNameId">FirstName</label>
+      <div 
+      [ngClass]="{'has-error':(firstNameVar.touched || firstNameVar.dirty) && firstNameVar.errors}">
+      <input type="text" name="firstName" class="form-control"
+      id="firstNameId"
+      [(ngModel)]="customer.firstName"
+      #firstNameVar="ngModel" 
+      required
+      minlength="3"
+      >
+      <span class="help-block" *ngIf="(firstNameVar.touched || firstNameVar.dirty) && firstNameVar.errors" > 
+          <span *ngIf="firstNameVar.errors.required">First Name is Mandatory</span>
+          <span *ngIf="firstNameVar.errors.minlength">first Name Should be of minimum three characters. </span>
+        </span>
+    </div>
+      <br/>
+        <label for="lastNameId">LastName</label>
+        <div 
+      [ngClass]="{'has-error':(lastNameVar.touched || lastNameVar.dirty) && lastNameVar.errors}">
+      <input type="text" name="lastName" class="form-control"
+      id="lastNameId"
+      [(ngModel)]="customer.lastName"
+      #lastNameVar="ngModel"
+      required
+      maxlength="20">
+
+  
+      <span class="help-block" *ngIf="(lastNameVar.touched || lastNameVar.dirty) && lastNameVar.errors" > 
+          <span *ngIf="lastNameVar.errors.required">Last Name is Mandatory</span>
+          <span *ngIf="lastNameVar.errors.maxlength">Last Name Should be of maximum 20 characters. </span>
+        </span>
+     
+    </div>
+      <br/>
+       <label for="emailId">EmailId</label>
+       <div 
+       [ngClass]="{'has-error':(emailVar.touched || emailVar.dirty) && emailVar.errors}">
+      <input type="text" name="email" class="form-control"
+      [(ngModel)]="customer.email"
+      id="emailId"
+      #emailVar="ngModel"
+      required
+      pattern="[a-z0-9.-/.+-]+@[a-z0-9.-]+">
+      <span class="help-block" *ngIf="(emailVar.touched || emailVar.dirty) && emailVar.errors" > 
+          <span *ngIf="emailVar.errors.required">email is Mandatory</span>
+          <span *ngIf="emailVar.errors.pattern">Email should match the pattern. </span>
+        </span>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+       <span>
+         <button class="btn btn-primary" type="submit" [disabled]="!custForm.valid">
+           Save
+         </button>
+       </span>
+      </div>
+    </div>
+
+    </form>
+    </div>
+    </div>
+ 
+  <br/> Dirty   : {{custForm.dirty}}
+  <br/> Touched : {{custForm.touched}}
+  <br/>Valid   : {{custForm.valid}}
+  <br/> Value   : {{custForm.value|json}}
+  
+  

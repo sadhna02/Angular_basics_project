@@ -1,0 +1,46 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+  <h2>{{pageTitle}}</h2>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-2">FilterBy:</div>
+    <div class="col-md-4"><input type="text" [(ngModel)]="listFilter"></div>
+    </div>
+ <div>
+   <h3>Filtered By :{{listFilter}}</h3>
+ <div>     
+<table class="table table-responsive"
+ *ngIf="products && products.length>0">
+<thead>
+  <tr>
+    <th><button class="btn btn-primary" (click)="toggleImage()">
+      {{showImg?'Hide':'Show'}}Image
+      </button>
+      </th>
+    <th>ProductName</th>
+    <th>ProductCode</th>
+    <th>ReleaseDate</th>
+    <th>Price</th>
+    <th>Rating</th>
+  
+  </tr>
+</thead>
+  <tr *ngFor="let product of products|productFilter:listFilter">
+   <td><img *ngIf="showImg" [src]="product.imageUrl" 
+   title="{{product.productName}}" 
+   [alt]="product.productCode"
+   [height]="imgheight"
+   [width]="imgwidth"></td>
+    <td><a [routerLink]="['/product',product.productId]">{{product.productName|uppercase}}</a></td>
+    <td>{{product.productCode|lowercase}}</td>
+    <td>{{product.releaseDate}}</td>
+    <td>{{product.price|currency:'EUR':'symbol'}}</td>
+    <!-- <td>{{product.starRating|number:'2.3-4'}}</td> -->
+    <!-- $event is string here -->
+    <td><app-star [rating]="product.starRating" (notify)="onNotify($event)"></app-star></td>
+  </tr>   
+
+</table>
+</div>
+</div>
